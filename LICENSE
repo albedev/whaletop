@@ -1,0 +1,63 @@
+dtop License — MIT No-Sale variant, version 1.0
+
+Copyright (c) 2026 albedev
+
+This license is based on the MIT License, with the "sublicense" and "sell"
+rights removed and replaced by the No-Sale conditions below. It is a
+source-available license, not an OSI-approved open source license.
+
+1. Grant
+
+Permission is hereby granted, free of charge, to any person or organization
+obtaining a copy of this software and associated documentation files (the
+"Software"), to use, copy, modify, merge, publish and distribute the Software
+and Derivative Works, and to permit persons to whom the Software is furnished
+to do so, subject to the conditions below.
+
+Use is permitted for any purpose, including use inside for-profit companies
+(for example to monitor their own infrastructure), as long as the Software and
+Derivative Works are not Sold as defined in section 3.
+
+2. Definitions
+
+"Derivative Work" means any modified version of the Software, any fork, any
+translation or port to another language, and any work that includes the
+Software or a substantial portion of it, in source or binary form.
+
+"Sell" means distributing, licensing, renting or otherwise making available
+the Software or a Derivative Work to third parties in exchange for a fee or
+any other consideration, including without limitation:
+  (a) selling copies, binaries, licenses, subscriptions or "pro" editions;
+  (b) including it in a product, bundle, appliance or image that is sold;
+  (c) charging for access to a hosted or managed service whose value derives
+      entirely or substantially from the functionality of the Software.
+
+3. Conditions
+
+  a) No Sale. You may not Sell the Software or any Derivative Work. This
+     condition applies to every recipient, including recipients of Derivative
+     Works.
+  b) Same license for Derivative Works. Any distribution of the Software or
+     of a Derivative Work must be under the terms of this license, free of
+     charge, with the complete corresponding source code made available or
+     offered free of charge. You may not impose any further restrictions.
+  c) Notice. The above copyright notice, this license, and a notice of any
+     changes you made must be included in all copies or substantial portions
+     of the Software and of Derivative Works.
+  d) Contributions. Unless stated otherwise, any contribution intentionally
+     submitted for inclusion in the Software is licensed under this license.
+  e) Third-party components. Third-party libraries used by the Software
+     remain under their own licenses; this license does not change them.
+
+Any use, distribution or Derivative Work that violates these conditions
+automatically terminates the rights granted by this license to the violator.
+
+4. Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
