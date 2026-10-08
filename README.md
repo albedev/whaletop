@@ -38,6 +38,7 @@ container by container and object by object, and lets you act right away (stop, 
 Requires Go ≥ 1.26.
 ```
 make build        # → bin/dtop
+make install      # → ~/.local/bin/dtop (override with PREFIX=/usr/local)
 make cross        # darwin/linux × amd64/arm64
 ```
 

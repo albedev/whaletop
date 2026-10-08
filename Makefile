@@ -1,10 +1,17 @@
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 LDFLAGS := -s -w -X main.version=$(VERSION)
 
-.PHONY: build run test vet dump licenses cross clean
+PREFIX ?= $(HOME)/.local
+
+.PHONY: build install run test vet dump licenses cross clean
 
 build:
 	CGO_ENABLED=0 go build -trimpath -ldflags "$(LDFLAGS)" -o bin/dtop ./cmd/dtop
+
+# installs into $(PREFIX)/bin (default ~/.local/bin, no sudo needed)
+install: build
+	install -d $(PREFIX)/bin
+	install -m 755 bin/dtop $(PREFIX)/bin/dtop
 
 run: build
 	./bin/dtop
