@@ -71,7 +71,9 @@ install -m 755 "$tmp/whaletop" "$DIR/whaletop" 2>/dev/null || {
 	cp "$tmp/whaletop" "$DIR/whaletop" && chmod 755 "$DIR/whaletop"
 } || die "cannot write to $DIR (set WHALETOP_INSTALL_DIR or run with sudo)"
 # binaries are not notarized: make sure Gatekeeper does not block them
-[ "$os" = darwin ] && xattr -d com.apple.quarantine "$DIR/whaletop" 2>/dev/null || true
+if [ "$os" = darwin ]; then
+	xattr -d com.apple.quarantine "$DIR/whaletop" 2>/dev/null || true
+fi
 
 # short alias, never over a foreign `wtop` (e.g. the PyPI web-server tool)
 if [ -e "$DIR/wtop" ] && [ "$(readlink "$DIR/wtop" 2>/dev/null)" != whaletop ]; then
