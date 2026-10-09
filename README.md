@@ -36,11 +36,14 @@ container by container and object by object, and lets you act right away (stop, 
 
 ## Install
 ```
-brew install --cask albedev/tap/whaletop                  # macOS / Linux, installs `whaletop` + `wtop`
+curl -fsSL https://raw.githubusercontent.com/albedev/whaletop/main/install.sh | sh   # macOS / Linux, no sudo
+brew install --cask albedev/tap/whaletop                  # Homebrew, installs `whaletop` + `wtop`
 go install github.com/albedev/whaletop/cmd/whaletop@latest   # needs Go ≥ 1.26 (alias: alias wtop=whaletop)
 ```
 Binaries (`.tar.gz`), `.deb` and `.rpm` packages for darwin/linux × amd64/arm64 are attached to every
 [GitHub release](https://github.com/albedev/whaletop/releases). The Linux packages also install the `wtop` alias.
+`install.sh` verifies the checksum and installs into `~/.local/bin`; set `WHALETOP_INSTALL_DIR` or `WHALETOP_VERSION`
+to change the target directory or pin a release.
 
 ## Build from source
 Requires Go ≥ 1.26.

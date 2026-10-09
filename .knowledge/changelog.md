@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+- `install.sh` one-line installer (latest or pinned release, sha256 check, `~/.local/bin`, `wtop` alias, never
+  overwrites a foreign `wtop`); tested in CI on Linux and macOS together with shellcheck.
 - `--version` shows the module version for `go install …@vX.Y.Z` builds (was `dev`).
 
 ## v0.3.0 — 2026-10-09

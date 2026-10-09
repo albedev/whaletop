@@ -17,7 +17,17 @@ The workflow:
 4. publishes the GitHub release with an auto changelog (commits starting with `docs:`, `test:`, `ci:` are excluded);
 5. writes `Casks/whaletop.rb` into **albedev/homebrew-tap** and pushes it.
 
-Users then install with `brew install --cask albedev/tap/whaletop` (or `brew upgrade`).
+Users then install with `brew install --cask albedev/tap/whaletop` (or `brew upgrade`), or with the one-line
+installer `curl -fsSL https://raw.githubusercontent.com/albedev/whaletop/main/install.sh | sh`.
+
+## install.sh
+POSIX sh (tested with macOS sh and dash; shellcheck in CI). Resolves the latest tag through the
+`/releases/latest` redirect (no GitHub API call, so no rate limit), downloads the archive + `checksums.txt`,
+verifies sha256, installs into `$WHALETOP_INSTALL_DIR` (default `~/.local/bin`, no sudo) and creates the `wtop`
+symlink unless a foreign `wtop` exists. It depends on the archive naming `whaletop_<version>_<os>_<arch>.tar.gz`
+in `.goreleaser.yaml`: change both together. CI job `install-script` runs it against the latest release.
+A self-hosted APT repository was considered and dropped (user decision, 2026-10-09): the `.deb` on each release
+plus install.sh are enough.
 
 ## Homebrew details
 - **Cask, not formula**: GoReleaser ≥ 2.10 deprecated `brews` (formulas built from prebuilt binaries) in favour of

@@ -22,3 +22,17 @@ jobs:
       - run: go vet ./...
       - run: go test ./...
       - run: go build ./cmd/whaletop
+
+  install-script:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - if: runner.os == 'Linux'
+        run: shellcheck -s sh install.sh
+      - name: install latest release with install.sh
+        run: |
+          WHALETOP_INSTALL_DIR="$RUNNER_TEMP/bin" sh install.sh
+          "$RUNNER_TEMP/bin/wtop" --version
