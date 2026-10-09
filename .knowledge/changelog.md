@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.4.0 — 2026-10-09
 - Update notifications: background check of the latest release (≤ 1/day, cached), `⬆ vX.Y.Z` header badge,
   status message and help line with the upgrade command for the detected install method.
   `--no-update-check` / `WHALETOP_NO_UPDATE_CHECK=1` to disable.
