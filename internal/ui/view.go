@@ -54,6 +54,9 @@ func (m Model) header() string {
 	}
 	tabs := tab(viewResources, "1", "resources") + " " + tab(viewDisk, "2", "disk")
 	right := tabs + sDim.Render("  "+time.Now().Format("15:04:05")+" ") + sMain.Render(m.opt.Interval.String()+" ")
+	if m.updLatest != "" {
+		right = sYel.Bold(true).Render("⬆ "+m.updLatest+" ") + right
+	}
 	return spread(left, right, m.w)
 }
 

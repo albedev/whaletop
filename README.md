@@ -65,6 +65,13 @@ whaletop --no-mouse            # leave text selection to the terminal
 `wtop` is a built-in short alias: every command above also works as `wtop …`.
 Press `?` for the full key list.
 
+### Updates
+whaletop checks GitHub for a new release at most once a day (one request to github.com, in the background) and shows
+`⬆ vX.Y.Z` in the header together with the right command for how you installed it:
+`whaletop update` (install.sh / tarball: downloads, verifies the sha256 and replaces the binary),
+`brew upgrade --cask whaletop`, a new `.deb`/`.rpm`, or `go install …@latest`.
+Nothing is ever updated automatically. Disable the check with `--no-update-check` or `WHALETOP_NO_UPDATE_CHECK=1`.
+
 > macOS: `ctrl+↑/↓` are bound to Mission Control by default and never reach the terminal; use `shift+↑/↓`
 > or disable them in System Settings → Keyboard → Keyboard Shortcuts → Mission Control.
 

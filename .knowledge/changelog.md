@@ -1,6 +1,11 @@
 # Changelog
 
 ## Unreleased
+- Update notifications: background check of the latest release (≤ 1/day, cached), `⬆ vX.Y.Z` header badge,
+  status message and help line with the upgrade command for the detected install method.
+  `--no-update-check` / `WHALETOP_NO_UPDATE_CHECK=1` to disable.
+- `whaletop update` (also `wtop update`): self-update for install.sh/tarball installs, sha256-verified, atomic swap
+  with rollback (minio/selfupdate); refuses for Homebrew, .deb/.rpm, go install and source builds.
 - `install.sh` one-line installer (latest or pinned release, sha256 check, `~/.local/bin`, `wtop` alias, never
   overwrites a foreign `wtop`); tested in CI on Linux and macOS together with shellcheck.
 - `--version` shows the module version for `go install …@vX.Y.Z` builds (was `dev`).

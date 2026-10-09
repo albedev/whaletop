@@ -19,6 +19,7 @@ import (
 	"github.com/albedev/whaletop/internal/collector"
 	"github.com/albedev/whaletop/internal/docker"
 	"github.com/albedev/whaletop/internal/ui"
+	"github.com/albedev/whaletop/internal/update"
 )
 
 var version = "dev" // overridden with -ldflags "-X main.version=..." (Makefile, GoReleaser)
@@ -45,14 +46,45 @@ func main() {
 		noMouse   = flag.Bool("no-mouse", false, "disable mouse support (keeps terminal text selection)")
 		showVer   = flag.Bool("version", false, "print version and exit")
 		dump      = flag.String("dump", "", "render one frame of each view at WxH to stdout and exit (debug)")
+		noUpdChk  = flag.Bool("no-update-check", false, "do not check GitHub for new releases (also WHALETOP_NO_UPDATE_CHECK=1)")
 	)
+	flag.Usage = func() {
+		fmt.Fprintf(flag.CommandLine.Output(), "usage: whaletop [flags]\n       whaletop update   self-update to the latest release\n\nflags:\n")
+		flag.PrintDefaults()
+	}
 	flag.Parse()
+	ver := buildVersion()
 	if *showVer {
-		fmt.Println("whaletop", buildVersion())
+		fmt.Println("whaletop", ver)
 		return
+	}
+	switch flag.Arg(0) {
+	case "":
+	case "update":
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
+		defer cancel()
+		msg, err := update.Apply(ctx, ver)
+		if err != nil {
+			fatal(err)
+		}
+		fmt.Println(msg)
+		return
+	default:
+		flag.Usage()
+		os.Exit(2)
 	}
 
 	opt := ui.Options{Interval: *interval, DiskInterval: *diskEvery, ShowStopped: *all}
+	if !*noUpdChk && os.Getenv("WHALETOP_NO_UPDATE_CHECK") == "" && update.IsRelease(ver) {
+		exe, _ := os.Executable()
+		opt.CheckUpdate = func(ctx context.Context) (string, string, bool) {
+			latest, err := update.Latest(ctx)
+			if err != nil || !update.Newer(latest, ver) {
+				return "", "", false
+			}
+			return latest, update.Detect(exe, ver).Hint(), true
+		}
+	}
 	switch *graphMode {
 	case "block":
 		opt.Mode = ui.ModeBlock

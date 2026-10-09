@@ -25,6 +25,9 @@ type Options struct {
 	DiskLimit    int64
 	Mode         GraphMode
 	ShowStopped  bool
+	// CheckUpdate, when set, is called once in the background at startup; it returns
+	// the newer release tag and the command to install it (nil = update check disabled).
+	CheckUpdate func(context.Context) (latest, hint string, ok bool)
 }
 
 type viewID int
@@ -46,6 +49,7 @@ type (
 		text string
 		err  error
 	}
+	updateMsg struct{ latest, hint string }
 )
 
 type eventLine struct {
@@ -87,6 +91,8 @@ type Model struct {
 	statusErr bool
 	statusAt  time.Time
 
+	updLatest, updHint string // newer release available (header badge + help)
+
 	confirm *confirmState
 	menu    *menuState
 	logs    *logView
@@ -116,7 +122,18 @@ func (m Model) Init() tea.Cmd {
 	col, ctx, limit := m.col, m.ctx, m.opt.DiskLimit
 	first := func() tea.Msg { return snapMsg(col.Sample(ctx)) }
 	disk := func() tea.Msg { return diskMsg(col.Disk(ctx, limit)) }
-	return tea.Batch(first, disk, m.waitEvent(), diskPoll())
+	cmds := []tea.Cmd{first, disk, m.waitEvent(), diskPoll()}
+	if check := m.opt.CheckUpdate; check != nil {
+		cmds = append(cmds, func() tea.Msg {
+			c, cancel := context.WithTimeout(ctx, 10*time.Second)
+			defer cancel()
+			if latest, hint, ok := check(c); ok {
+				return updateMsg{latest, hint}
+			}
+			return nil
+		})
+	}
+	return tea.Batch(cmds...)
 }
 
 // ---- commands ----
@@ -271,6 +288,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.setStatus(msg.text, false)
 		}
 		return m, tea.Batch(m.sampleCmd(), m.diskCmd())
+
+	case updateMsg:
+		m.updLatest, m.updHint = msg.latest, msg.hint
+		m.setStatus("whaletop "+msg.latest+" is available: run `"+msg.hint+"`", false)
+		return m, nil
 
 	case logMsg:
 		if m.logs != nil && m.logs.id == msg.id {

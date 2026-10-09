@@ -1,7 +1,11 @@
 # Dependencies
 
 Direct (go.mod): bubbletea v1.3.10, bubbles v1.0.0, lipgloss v1.1.0, charmbracelet/x/ansi, go-colorful,
-moby/moby/client v0.6.1, moby/moby/api v1.56.1, gopsutil/v4 v4.26.9, go-humanize v1.1.0, golang.org/x/sys.
+moby/moby/client v0.6.1, moby/moby/api v1.56.1, gopsutil/v4 v4.26.9, go-humanize v1.1.0, golang.org/x/sys,
+minio/selfupdate v0.6.0 (self-update, ADR 0012), golang.org/x/mod (semver).
+
+Rule: before adding a dependency run `make licenses` and reject anything that is not MIT/Apache-2.0/BSD-like
+(e.g. go-selfupdate was dropped because it pulled MPL-2.0 HashiCorp libraries, ADR 0012).
 
 Licenses of everything that ends up in the binary: only **MIT, Apache-2.0, BSD-3** (list in `THIRD_PARTY_NOTICES.md`,
 regenerable with `make licenses`). No NOTICE file to propagate. All compatible with whaletop's license (ADR 0009):

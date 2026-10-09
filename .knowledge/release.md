@@ -50,6 +50,23 @@ plus install.sh are enough.
   ```
   Chosen over a personal access token because it cannot touch any other repository and never expires silently.
 
+## Updates (notify + `whaletop update`)
+Package `internal/update`, wired in `cmd/whaletop/main.go` and `ui.Options.CheckUpdate`.
+- **Check**: at TUI start, in a tea.Cmd (10 s timeout), `update.Latest` resolves the latest tag through the
+  `/releases/latest` redirect (no GitHub API, no rate limit) and caches it for 24 h in
+  `<UserCacheDir>/whaletop/update-check.json` (macOS `~/Library/Caches`, Linux `~/.cache`). Errors are silent.
+  Skipped for non-release versions (`dev`, git-describe builds) and with `--no-update-check` /
+  `WHALETOP_NO_UPDATE_CHECK=1`.
+- **Install method** (`update.Detect`, symlinks resolved): `/Caskroom/` or `/Cellar/` → Homebrew;
+  `/usr/bin`, `/usr/sbin`, `/bin` → .deb/.rpm; `$GOBIN` or `$GOPATH/bin` (default `~/go/bin`) → go install;
+  non-release version → source build; anything else → manual (install.sh, tarball, `make install` of a tag).
+  Each method has its upgrade hint.
+- **`whaletop update`**: only for the manual method (others get an error with their hint). Downloads
+  `checksums.txt` + `whaletop_<v>_<os>_<arch>.tar.gz`, verifies sha256, extracts `whaletop` and swaps it atomically
+  with `github.com/minio/selfupdate` (rollback on failure). Through the `wtop` symlink the real file is updated.
+  Tested end to end on 2026-10-09 (v0.2.0 build → v0.3.0), tampered archive rejected in `TestApplyRejectsChecksumMismatch`.
+- Never automatic: see ADR 0012.
+
 ## Local checks
 ```sh
 go install github.com/goreleaser/goreleaser/v2@latest

@@ -137,6 +137,9 @@ func (m Model) renderHelp() string {
 		}
 		lines = append(lines, sHi.Render(fit(h[0], 14))+" "+sMain.Render(h[1]))
 	}
+	if m.updLatest != "" {
+		lines = append(lines, "", sYel.Bold(true).Render("⬆ whaletop "+m.updLatest+" is available: ")+sMain.Render(m.updHint))
+	}
 	lines = append(lines, "", sDim.Render("CPU%: docker stats style, 100% = 1 core. /DKR: share of what docker can use."))
 	lines = append(lines, sDim.Render("/LIM: share of the container's own memory limit."))
 	return dialog(sTitle.Render(" help "), lines, cBorder)

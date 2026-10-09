@@ -19,6 +19,8 @@ footer: context keys + "m graph:block|tty" (always visible, moves to the front i
 ╭i images │ c containers │ v volumes │ b build cache  (tabs in the title)╮  NAME STATE USED-BY SIZE [SHARED] CREATED LAST-USED DETAIL
 ╭detail: full id, name, used by (only if ≥ 26 rows)╮
 ```
+When a newer release exists the header shows a yellow `⬆ vX.Y.Z` badge, a 6 s status message gives the upgrade
+command, and the help overlay (`?`) repeats it (see release.md → Updates).
 Minimum 60x12. Centered overlays (confirm, menu, help) composed with `overlay()` (ANSI-aware, x/ansi).
 
 ## Keys

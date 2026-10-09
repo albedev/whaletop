@@ -9,13 +9,16 @@ require (
 	github.com/charmbracelet/x/ansi v0.11.8
 	github.com/dustin/go-humanize v1.1.0
 	github.com/lucasb-eyer/go-colorful v1.4.1
+	github.com/minio/selfupdate v0.6.0
 	github.com/moby/moby/api v1.56.1
 	github.com/moby/moby/client v0.6.1
 	github.com/shirou/gopsutil/v4 v4.26.9
+	golang.org/x/mod v0.41.0
 	golang.org/x/sys v0.48.0
 )
 
 require (
+	aead.dev/minisign v0.2.0 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
@@ -56,5 +59,7 @@ require (
 	go.opentelemetry.io/otel v1.35.0 // indirect
 	go.opentelemetry.io/otel/metric v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
-	golang.org/x/text v0.3.8 // indirect
+	golang.org/x/crypto v0.53.0 // indirect
+	golang.org/x/exp v0.0.0-20250813145105-42675adae3e6 // indirect
+	golang.org/x/text v0.38.0 // indirect
 )
