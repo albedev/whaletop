@@ -4,7 +4,7 @@ Framework: bubbletea v1 + lipgloss v1 + bubbles v1 (textinput, viewport). AltScr
 
 ## Layout
 ```
-header: dtop · version · OS · arch · storage driver           1resources 2disk  now  interval
+header: whaletop · version · OS · arch · storage driver           1resources 2disk  now  interval
 ── resources ──────────────────────────────────────────────────────────────────────────
 ╭cpu (50%)──────────────╮╭mem (25%)────────╮╭net·io (25%)──╮   height 35% (8..14 rows)
 │cores used / NCPU  %   ││limit / used / ■■ ││rx graph / tx │   below 100 columns: no net·io

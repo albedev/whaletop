@@ -16,7 +16,7 @@
 7. **Image prune**: `ImagesDeleted` contains both `Untagged` and `Deleted` entries; count only `Deleted`.
    With the containerd store (recent Docker Desktop) `SpaceReclaimed` may come out very small: it is the daemon's value.
 8. **Footer**: the `m` key for the chart toggle was not evident (there was only "mode:block"): it is now always shown as a hotkey.
-9. **ctrl+arrows on macOS** are intercepted by the system (Mission Control) and don't reach dtop: alias `shift+↑/↓`.
+9. **ctrl+arrows on macOS** are intercepted by the system (Mission Control) and don't reach whaletop: alias `shift+↑/↓`.
 10. **Testing with tmux**: `Escape` followed immediately by another key is read by bubbletea as `alt+<key>`.
     Send `Escape` in a separate `send-keys` with a pause, otherwise the following keys become actions
     (it happened: `/redi` became restart + exec).

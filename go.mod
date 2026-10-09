@@ -1,4 +1,4 @@
-module github.com/albedev/dtop
+module github.com/albedev/whaletop
 
 go 1.26.4
 

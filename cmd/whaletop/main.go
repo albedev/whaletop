@@ -1,4 +1,4 @@
-// dtop is a btop-like terminal monitor for Docker: resources (CPU, memory,
+// whaletop is a btop-like terminal monitor for Docker: resources (CPU, memory,
 // network, IO) relative to what docker may use, and disk usage of images,
 // containers, volumes and build cache, with actions to stop/kill/restart/remove.
 package main
@@ -15,9 +15,9 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/dustin/go-humanize"
 
-	"github.com/albedev/dtop/internal/collector"
-	"github.com/albedev/dtop/internal/docker"
-	"github.com/albedev/dtop/internal/ui"
+	"github.com/albedev/whaletop/internal/collector"
+	"github.com/albedev/whaletop/internal/docker"
+	"github.com/albedev/whaletop/internal/ui"
 )
 
 var version = "dev" // overridden with -ldflags "-X main.version=..."
@@ -36,7 +36,7 @@ func main() {
 	)
 	flag.Parse()
 	if *showVer {
-		fmt.Println("dtop", version)
+		fmt.Println("whaletop", version)
 		return
 	}
 
@@ -85,8 +85,8 @@ func main() {
 		return
 	}
 
-	if f := os.Getenv("DTOP_DEBUG"); f != "" {
-		lf, err := tea.LogToFile(f, "dtop")
+	if f := os.Getenv("WHALETOP_DEBUG"); f != "" {
+		lf, err := tea.LogToFile(f, "whaletop")
 		if err != nil {
 			fatal(err)
 		}
@@ -103,6 +103,6 @@ func main() {
 }
 
 func fatal(err error) {
-	fmt.Fprintln(os.Stderr, "dtop:", err)
+	fmt.Fprintln(os.Stderr, "whaletop:", err)
 	os.Exit(1)
 }

@@ -1,4 +1,4 @@
-// Package collector turns raw Docker API data into the metrics dtop displays.
+// Package collector turns raw Docker API data into the metrics whaletop displays.
 // It is UI agnostic: the UI calls Sample()/Disk() from tea.Cmds and renders the
 // returned snapshots. Formulas are documented in .knowledge/metrics.md.
 package collector
@@ -14,8 +14,8 @@ import (
 	"github.com/moby/moby/api/types/container"
 	"github.com/moby/moby/client"
 
-	"github.com/albedev/dtop/internal/docker"
-	"github.com/albedev/dtop/internal/host"
+	"github.com/albedev/whaletop/internal/docker"
+	"github.com/albedev/whaletop/internal/host"
 )
 
 // HistoryLen is the number of samples kept for graphs (enough for a wide terminal).
@@ -25,7 +25,7 @@ const HistoryLen = 300
 type Capacity struct {
 	CPUs     int   // NCPU reported by the daemon (VM cpus on Docker Desktop)
 	Mem      int64 // MemTotal reported by the daemon
-	HostCPUs int   // physical host running dtop
+	HostCPUs int   // physical host running whaletop
 	HostMem  int64
 }
 

@@ -1,6 +1,6 @@
 //go:build unix
 
-// Package host reads resources of the machine dtop runs on, and figures out how
+// Package host reads resources of the machine whaletop runs on, and figures out how
 // much disk the Docker daemon can use. Docker's API does not expose the size
 // of its storage, so this is platform specific (see .knowledge/metrics.md).
 package host
@@ -16,7 +16,7 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// Resources of the physical host running dtop.
+// Resources of the physical host running whaletop.
 type Resources struct {
 	CPUs int
 	Mem  int64

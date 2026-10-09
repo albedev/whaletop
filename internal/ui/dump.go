@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"github.com/albedev/dtop/internal/collector"
-	"github.com/albedev/dtop/internal/docker"
+	"github.com/albedev/whaletop/internal/collector"
+	"github.com/albedev/whaletop/internal/docker"
 )
 
-// Dump renders single frames of both views without a TTY (dtop --dump 160x45).
+// Dump renders single frames of both views without a TTY (whaletop --dump 160x45).
 // It drives the model with the same messages the program loop would deliver,
 // so it doubles as a smoke test of the whole pipeline.
 func Dump(ctx context.Context, cli *docker.Client, col *collector.Collector, opt Options, w, h int) []string {

@@ -11,8 +11,8 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/dustin/go-humanize"
 
-	"github.com/albedev/dtop/internal/collector"
-	"github.com/albedev/dtop/internal/docker"
+	"github.com/albedev/whaletop/internal/collector"
+	"github.com/albedev/whaletop/internal/docker"
 )
 
 type diskSort int

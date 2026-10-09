@@ -11,7 +11,7 @@ selling the software for a fee is forbidden; **no derivative may be distributed 
 - CC BY-NC-SA 4.0: Creative Commons advises against its licenses for software; "NC" is ambiguous for corporate use.
 
 **Decision.** `LICENSE` = modified MIT ("MIT No-Sale v1.0"): MIT grant without "sublicense"/"sell"; definitions of
-Derivative Work and Sell (sale of copies/licenses/subscriptions, bundles sold, paid hosted services based on dtop);
+Derivative Work and Sell (sale of copies/licenses/subscriptions, bundles sold, paid hosted services based on whaletop);
 conditions: No Sale for all recipients, derivatives only under the same license and free with sources, notice,
 contributions under the same license, third-party libraries under their own licenses; violation = termination of rights.
 

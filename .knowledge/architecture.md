@@ -1,7 +1,7 @@
 # Architecture
 
 ```
-cmd/dtop/main.go          flags, connection, starts tea.Program (or --dump)
+cmd/whaletop/main.go          flags, connection, starts tea.Program (or --dump)
 internal/docker/          thin wrapper over the official moby SDK
   client.go               New(), ResolveEndpoint() (DOCKER_HOST > DOCKER_CONTEXT > config.json > well-known sockets)
   actions.go              ContainerAction, RemoveObject, Prune (+ Action.Destructive())

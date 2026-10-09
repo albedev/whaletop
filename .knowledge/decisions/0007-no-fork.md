@@ -4,6 +4,7 @@ Date: 2026-10-08 · Status: accepted
 Evaluated:
 - **amir20/dtop** (Rust, MIT): multi-host dashboard, monitoring only; start/stop/remove actions on the roadmap; no disk.
   ⚠ Same name "dtop" (also the Homebrew formula): if we publish, we need a different name or a namespace (see roadmap).
+  → Resolved: the project was renamed to **whaletop** (ADR 0010).
 - **lazydocker** (Go, MIT, gocui): full manager, but no resources related to docker capacity and no disk view
   with last-use/reclaimable; gocui architecture is far from a btop-style layout.
 - **DockBub** (Go, MIT, bubbletea): disk usage and actions, but pre-release (no tags, inactive since Nov 2025) and oriented toward "management" more than "monitor".

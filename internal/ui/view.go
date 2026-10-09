@@ -45,7 +45,7 @@ func (m Model) View() string {
 
 func (m Model) header() string {
 	i := m.col.Info()
-	left := sTitle.Render(" dtop ") + sDim.Render(fmt.Sprintf("docker %s · %s · %s · %s", i.Version, i.OS, i.Arch, i.Driver))
+	left := sTitle.Render(" whaletop ") + sDim.Render(fmt.Sprintf("docker %s · %s · %s · %s", i.Version, i.OS, i.Arch, i.Driver))
 	tab := func(id viewID, key, label string) string {
 		if m.view == id {
 			return sHi.Render(key) + sSel.Render(label)

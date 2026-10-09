@@ -13,8 +13,8 @@ import (
 	"github.com/dustin/go-humanize"
 	"github.com/moby/moby/api/types/container"
 
-	"github.com/albedev/dtop/internal/collector"
-	"github.com/albedev/dtop/internal/docker"
+	"github.com/albedev/whaletop/internal/collector"
+	"github.com/albedev/whaletop/internal/docker"
 )
 
 type resSort int

@@ -1,6 +1,6 @@
 # Third-party components
 
-dtop links the following libraries. Each one stays under its own license
+whaletop links the following libraries. Each one stays under its own license
 (all permissive: MIT, Apache-2.0, BSD). None ships a NOTICE file.
 Regenerate this list with `make licenses`.
 

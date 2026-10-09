@@ -11,8 +11,8 @@ import (
 	"github.com/moby/moby/api/types/container"
 	"github.com/moby/moby/client"
 
-	"github.com/albedev/dtop/internal/docker"
-	"github.com/albedev/dtop/internal/host"
+	"github.com/albedev/whaletop/internal/docker"
+	"github.com/albedev/whaletop/internal/host"
 )
 
 // Usage says how an object is used, ordered from "most alive" to "garbage".

@@ -1,4 +1,4 @@
-// Package ui is the bubbletea front-end of dtop.
+// Package ui is the bubbletea front-end of whaletop.
 package ui
 
 import (
@@ -14,8 +14,8 @@ import (
 	"github.com/moby/moby/api/types/events"
 	"github.com/moby/moby/client"
 
-	"github.com/albedev/dtop/internal/collector"
-	"github.com/albedev/dtop/internal/docker"
+	"github.com/albedev/whaletop/internal/collector"
+	"github.com/albedev/whaletop/internal/docker"
 )
 
 // Options are the command line settings.
@@ -476,9 +476,9 @@ func (m *Model) execShell(id, name string) tea.Cmd {
 	})
 }
 
-var debug = os.Getenv("DTOP_DEBUG") != ""
+var debug = os.Getenv("WHALETOP_DEBUG") != ""
 
-// debugf logs to the DTOP_DEBUG file (set up by main with tea.LogToFile).
+// debugf logs to the WHALETOP_DEBUG file (set up by main with tea.LogToFile).
 func debugf(format string, args ...any) {
 	if debug {
 		log.Printf(format, args...)

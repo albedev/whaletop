@@ -1,4 +1,4 @@
-# .knowledge — dtop project memory
+# .knowledge — whaletop project memory
 
 This folder collects **everything that cannot be understood by reading the code alone**:
 why certain choices were made, formulas, known limits, pitfalls already encountered.
@@ -14,12 +14,12 @@ Every non-trivial change updates at least one of these files in the same commit:
 ## Index
 | File | Contents |
 |---|---|
-| [overview.md](overview.md) | What dtop is, original requirements, current status |
+| [overview.md](overview.md) | What whaletop is, original requirements, current status |
 | [architecture.md](architecture.md) | Packages, data flow, bubbletea loop, refresh cadences |
 | [metrics.md](metrics.md) | CPU/memory/network/IO formulas, disk capacity, "last used" and state heuristics |
 | [docker-api.md](docker-api.md) | Endpoints and SDK options used, quirks of the moby SDK v29+ |
 | [ui.md](ui.md) | Layout, keys, charts, colors, widgets |
-| [testing.md](testing.md) | How to test: unit tests, `--dump`, tmux, fixtures, `DTOP_DEBUG` |
+| [testing.md](testing.md) | How to test: unit tests, `--dump`, tmux, fixtures, `WHALETOP_DEBUG` |
 | [gotchas.md](gotchas.md) | Bugs already encountered and how to avoid them |
 | [dependencies.md](dependencies.md) | Dependencies and licenses |
 | [roadmap.md](roadmap.md) | Proposed ideas, things to do |

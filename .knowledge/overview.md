@@ -1,6 +1,6 @@
 # Overview
 
-**dtop** is a terminal monitor in the style of [btop](https://github.com/aristocratos/btop), dedicated to Docker.
+**whaletop** (alias `wtop`; developed as "dtop" until v0.2) is a terminal monitor in the style of [btop](https://github.com/aristocratos/btop), dedicated to Docker.
 Single, static Go binary, no external runtime (the `docker` CLI is only needed for the `e` shell).
 
 ## Original requirements (user, 2026-10-08)
