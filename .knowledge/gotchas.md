@@ -23,6 +23,8 @@
 11. **Docker Desktop's settings-store.json** may be unreadable in sandboxed environments ("Operation not permitted"):
    the disk estimate falls back to the logical size of `Docker.raw`.
 12. **Shadowed install**: a user ran install.sh (v0.4.0 into `~/.local/bin`) but `wtop --version` kept printing
-    v0.3.0, because another copy earlier in PATH (typically `/usr/bin/wtop` from an old `.deb`) or bash's command
-    hash won. install.sh now resolves `whaletop`/`wtop` with `command -v` after installing and warns when they point
+    v0.3.0. Real cause (Linux VM, 2026-10-09): bash's command hash still pointed to the Linuxbrew cask copy
+    (`/home/linuxbrew/.linuxbrew/bin/wtop`, v0.3.0) used earlier in the same shell; `type -a` showed the new copy
+    first, `hash -r` fixed it. Another copy earlier in PATH (e.g. `/usr/bin/wtop` from an old `.deb`) has the same
+    symptom. Note: the Homebrew cask also installs fine on Linux (Linuxbrew). install.sh now resolves `whaletop`/`wtop` with `command -v` after installing and warns when they point
     elsewhere, and always reminds `hash -r`. Diagnose with `type -a wtop whaletop`.
