@@ -22,3 +22,7 @@
     (it happened: `/redi` became restart + exec).
 11. **Docker Desktop's settings-store.json** may be unreadable in sandboxed environments ("Operation not permitted"):
    the disk estimate falls back to the logical size of `Docker.raw`.
+12. **Shadowed install**: a user ran install.sh (v0.4.0 into `~/.local/bin`) but `wtop --version` kept printing
+    v0.3.0, because another copy earlier in PATH (typically `/usr/bin/wtop` from an old `.deb`) or bash's command
+    hash won. install.sh now resolves `whaletop`/`wtop` with `command -v` after installing and warns when they point
+    elsewhere, and always reminds `hash -r`. Diagnose with `type -a wtop whaletop`.

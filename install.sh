@@ -84,6 +84,16 @@ fi
 
 say "installed $("$DIR/whaletop" --version) to $DIR (alias: wtop)"
 case ":$PATH:" in
-	*":$DIR:"*) ;;
+	*":$DIR:"*)
+		# another copy earlier in PATH (e.g. an old .deb in /usr/bin) would shadow this one
+		for cmd in whaletop wtop; do
+			found=$(command -v "$cmd" 2>/dev/null || true)
+			if [ -n "$found" ] && [ "$found" != "$DIR/$cmd" ]; then
+				say "warning: '$cmd' resolves to $found ($("$found" --version 2>/dev/null || echo "unknown version")), not to $DIR/$cmd"
+				say "         remove that copy (e.g. sudo apt remove whaletop / brew uninstall --cask whaletop) or put $DIR first in PATH"
+			fi
+		done
+		say "if your shell still runs an old version, run: hash -r"
+		;;
 	*) say "note: $DIR is not in your PATH; add it, e.g.: echo 'export PATH=\"$DIR:\$PATH\"' >> ~/.profile" ;;
 esac
