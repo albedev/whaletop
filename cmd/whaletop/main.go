@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"runtime/debug"
 	"syscall"
 	"time"
 
@@ -20,7 +21,18 @@ import (
 	"github.com/albedev/whaletop/internal/ui"
 )
 
-var version = "dev" // overridden with -ldflags "-X main.version=..."
+var version = "dev" // overridden with -ldflags "-X main.version=..." (Makefile, GoReleaser)
+
+// buildVersion falls back to the module version recorded by `go install …@vX.Y.Z`.
+func buildVersion() string {
+	if version != "dev" {
+		return version
+	}
+	if bi, ok := debug.ReadBuildInfo(); ok && bi.Main.Version != "" && bi.Main.Version != "(devel)" {
+		return bi.Main.Version
+	}
+	return version
+}
 
 func main() {
 	var (
@@ -36,7 +48,7 @@ func main() {
 	)
 	flag.Parse()
 	if *showVer {
-		fmt.Println("whaletop", version)
+		fmt.Println("whaletop", buildVersion())
 		return
 	}
 

@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- `--version` shows the module version for `go install …@vX.Y.Z` builds (was `dev`).
+
 ## v0.3.0 — 2026-10-09
 - Renamed from `dtop` to **whaletop** (module `github.com/albedev/whaletop`, binary `whaletop`), see ADR 0010.
 - `wtop` short alias: symlink installed by `make install` (and by the Homebrew formula).
