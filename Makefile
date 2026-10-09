@@ -3,7 +3,7 @@ LDFLAGS := -s -w -X main.version=$(VERSION)
 
 PREFIX ?= $(HOME)/.local
 
-.PHONY: build install uninstall run test vet dump licenses cross clean
+.PHONY: build install uninstall run test vet dump licenses cross release-check release-snapshot clean
 
 build:
 	CGO_ENABLED=0 go build -trimpath -ldflags "$(LDFLAGS)" -o bin/whaletop ./cmd/whaletop
@@ -46,5 +46,14 @@ cross:
 		CGO_ENABLED=0 GOOS=$${t%/*} GOARCH=$${t#*/} go build -trimpath -ldflags "$(LDFLAGS)" -o bin/whaletop-$${t%/*}-$${t#*/} ./cmd/whaletop || exit 1; \
 	done
 
+# GoReleaser (go install github.com/goreleaser/goreleaser/v2@latest): validate config / full local dry run into dist/
+GORELEASER ?= $(shell command -v goreleaser || echo $(shell go env GOPATH)/bin/goreleaser)
+
+release-check:
+	HOMEBREW_TAP_DEPLOY_KEY=dry-run $(GORELEASER) check
+
+release-snapshot:
+	HOMEBREW_TAP_DEPLOY_KEY=dry-run $(GORELEASER) release --snapshot --clean
+
 clean:
-	rm -rf bin
+	rm -rf bin dist

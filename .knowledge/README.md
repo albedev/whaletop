@@ -19,6 +19,7 @@ Every non-trivial change updates at least one of these files in the same commit:
 | [metrics.md](metrics.md) | CPU/memory/network/IO formulas, disk capacity, "last used" and state heuristics |
 | [docker-api.md](docker-api.md) | Endpoints and SDK options used, quirks of the moby SDK v29+ |
 | [ui.md](ui.md) | Layout, keys, charts, colors, widgets |
+| [release.md](release.md) | How releases are built and published (GoReleaser, Homebrew tap, deploy key) |
 | [testing.md](testing.md) | How to test: unit tests, `--dump`, tmux, fixtures, `WHALETOP_DEBUG` |
 | [gotchas.md](gotchas.md) | Bugs already encountered and how to avoid them |
 | [dependencies.md](dependencies.md) | Dependencies and licenses |

@@ -34,7 +34,15 @@ container by container and object by object, and lets you act right away (stop, 
 - **Multi-selection**: `ctrl+↑/↓` (or `shift+↑/↓`) selects a range of rows; actions apply to all of them.
 - **Block** (`▁▂▃▅▇█`) or **tty** (`░▒▓█`) graphs, toggled with `m`. Filter `/`, sort `←→`, compose grouping `g`, mouse.
 
-## Build
+## Install
+```
+brew install --cask albedev/tap/whaletop                  # macOS / Linux, installs `whaletop` + `wtop`
+go install github.com/albedev/whaletop/cmd/whaletop@latest   # needs Go ≥ 1.26 (alias: alias wtop=whaletop)
+```
+Binaries (`.tar.gz`), `.deb` and `.rpm` packages for darwin/linux × amd64/arm64 are attached to every
+[GitHub release](https://github.com/albedev/whaletop/releases). The Linux packages also install the `wtop` alias.
+
+## Build from source
 Requires Go ≥ 1.26.
 ```
 make build        # → bin/whaletop

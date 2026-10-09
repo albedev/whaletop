@@ -5,6 +5,8 @@
 - `wtop` short alias: symlink installed by `make install` (and by the Homebrew formula).
 - Debug env var renamed `DTOP_DEBUG` → `WHALETOP_DEBUG`.
 - `make install` / `make uninstall` targets (default `PREFIX=~/.local`).
+- Release pipeline: GoReleaser + GitHub Actions on tags `v*` (binaries, .deb/.rpm, checksums), Homebrew cask in
+  `albedev/homebrew-tap`, CI workflow (vet/test/build on Linux and macOS). See release.md and ADR 0011.
 
 ## v0.2.0 — 2026-10-08
 - Range multi-selection with `ctrl+↑/↓` (alias `shift+↑/↓`) in both views; batch actions

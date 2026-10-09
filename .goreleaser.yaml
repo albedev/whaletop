@@ -1,0 +1,104 @@
+# GoReleaser config: builds, archives, Linux packages and the Homebrew cask.
+# Runs in .github/workflows/release.yml on every pushed tag v*.
+# Local dry run: make release-snapshot   (see .knowledge/release.md)
+version: 2
+
+project_name: whaletop
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - id: whaletop
+    main: ./cmd/whaletop
+    binary: whaletop
+    env:
+      - CGO_ENABLED=0
+    goos: [darwin, linux]
+    goarch: [amd64, arm64]
+    flags: [-trimpath]
+    ldflags:
+      - -s -w -X main.version=v{{ .Version }}
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - LICENSE
+      - README.md
+      - THIRD_PARTY_NOTICES.md
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  use: github
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+
+nfpms:
+  - id: packages
+    package_name: whaletop
+    vendor: albedev
+    homepage: https://github.com/albedev/whaletop
+    maintainer: albedev <albethedev@gmail.com>
+    description: btop-style terminal monitor for Docker (resources, disk usage, actions).
+    license: MIT No-Sale v1.0 (source-available)
+    formats: [deb, rpm]
+    bindir: /usr/bin
+    contents:
+      # short alias, same as `make install` and the Homebrew cask
+      - src: /usr/bin/whaletop
+        dst: /usr/bin/wtop
+        type: symlink
+      - src: LICENSE
+        dst: /usr/share/doc/whaletop/LICENSE
+      - src: THIRD_PARTY_NOTICES.md
+        dst: /usr/share/doc/whaletop/THIRD_PARTY_NOTICES.md
+
+homebrew_casks:
+  - name: whaletop
+    binaries: [whaletop]
+    # second symlink for the `wtop` alias (Homebrew cask DSL)
+    custom_block: |
+      binary "whaletop", target: "wtop"
+    homepage: https://github.com/albedev/whaletop
+    description: btop-style terminal monitor for Docker
+    directory: Casks
+    caveats: "Run `whaletop` (or the short alias `wtop`). Press ? inside for help."
+    # binaries are not notarized: drop the quarantine flag so Gatekeeper lets them run
+    hooks:
+      post:
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/whaletop"]
+          end
+    repository:
+      owner: albedev
+      name: homebrew-tap
+      branch: main
+      # pushed over SSH with a deploy key scoped to the tap repo only (secret HOMEBREW_TAP_DEPLOY_KEY)
+      git:
+        url: git@github.com:albedev/homebrew-tap.git
+        private_key: "{{ .Env.HOMEBREW_TAP_DEPLOY_KEY }}"
+    commit_author:
+      name: albedev
+      email: albethedev@gmail.com
+    commit_msg_template: "whaletop {{ .Tag }}"
+
+release:
+  github:
+    owner: albedev
+    name: whaletop
+  footer: |
+    **Install**: `brew install --cask albedev/tap/whaletop` · `go install github.com/albedev/whaletop/cmd/whaletop@{{ .Tag }}` · or grab a binary / .deb / .rpm below.
+
+    whaletop is source-available under the MIT No-Sale license: free to use (companies included), fork and modify; selling it or any derivative is not allowed.
