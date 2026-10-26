@@ -1,5 +1,5 @@
-# Weekly grouped PRs for Go modules and GitHub Actions. Dependabot does not bump
-# the go directive: the weekly govulncheck job in ci.yml flags stdlib fixes.
+# Weekly grouped PRs for Go modules and GitHub Actions, auto-merged by deps.yml
+# when ci passes. The go directive is bumped by deps.yml instead.
 version: 2
 updates:
   - package-ecosystem: gomod

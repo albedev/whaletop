@@ -1,0 +1,54 @@
+# Dependency autopilot: merges Dependabot PRs once ci passes on them, and bumps
+# the go directive to the latest patch release weekly (Dependabot does not).
+name: deps
+
+on:
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+  schedule:
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge-dependabot:
+    if: >-
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.actor.login == 'dependabot[bot]' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      # --match-head-commit: never merge a commit ci did not test
+      - run: gh pr merge "$BRANCH" --squash --match-head-commit "$SHA" --repo "$GITHUB_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+
+  bump-go:
+    if: github.event_name != 'workflow_run'
+    runs-on: ubuntu-latest
+    env:
+      GOTOOLCHAIN: auto
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+      - run: go get go@patch
+      - id: diff
+        run: git diff --quiet go.mod || echo changed=true >> "$GITHUB_OUTPUT"
+      - if: steps.diff.outputs.changed
+        run: |
+          go vet ./...
+          go test ./...
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "fix(deps): go $(go mod edit -json | jq -r .Go)"
+          git push
