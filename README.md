@@ -1,6 +1,7 @@
 # whaletop
 
-A [btop](https://github.com/aristocratos/btop)-style terminal monitor for Docker.
+**whaletop** is a [btop](https://github.com/aristocratos/btop)-style terminal monitor (TUI) for Docker, written in Go:
+a `top` / `htop` for Docker containers, images, volumes and disk usage, and an alternative to `docker stats`, ctop and lazydocker.
 It shows how much CPU, memory and disk Docker **can** use, how much it is using and in what proportion,
 container by container and object by object, and lets you act right away (stop, kill, restart, rm, prune…).
 
