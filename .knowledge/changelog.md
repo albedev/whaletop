@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.4.1 — 2026-10-26
+- Security: built with Go 1.26.10 (was 1.26.4), fixes 15 reachable stdlib vulnerabilities (net/http, crypto/tls,
+  crypto/x509…) on the `whaletop update` and Docker client paths. Patch bumps of x/ansi, moby/client, x/mod, x/sys,
+  x/crypto.
+- `install.sh` warns when another `whaletop`/`wtop` earlier in PATH shadows the new one.
+- Dependabot (Go modules + GitHub Actions, weekly, grouped) and a govulncheck job in CI, also weekly.
+
 ## v0.4.0 — 2026-10-09
 - Update notifications: background check of the latest release (≤ 1/day, cached), `⬆ vX.Y.Z` header badge,
   status message and help line with the upgrade command for the detected install method.

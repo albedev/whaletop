@@ -1,0 +1,18 @@
+# Weekly grouped PRs for Go modules and GitHub Actions. Dependabot does not bump
+# the go directive: the weekly govulncheck job in ci.yml flags stdlib fixes.
+version: 2
+updates:
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      go:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
