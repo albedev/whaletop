@@ -1,5 +1,5 @@
-# Weekly grouped PRs for Go modules and GitHub Actions, auto-merged by deps.yml
-# when ci passes. The go directive is bumped by deps.yml instead.
+# Weekly grouped PRs for Go modules (auto-merged by deps.yml when ci passes) and
+# GitHub Actions (merged by hand). The go directive is bumped by deps.yml instead.
 version: 2
 updates:
   - package-ecosystem: gomod

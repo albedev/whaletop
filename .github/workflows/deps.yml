@@ -1,5 +1,6 @@
-# Dependency autopilot: merges Dependabot PRs once ci passes on them, and bumps
-# the go directive to the latest patch release weekly (Dependabot does not).
+# Dependency autopilot: merges Dependabot Go module PRs once ci passes on them,
+# and bumps the go directive to the latest patch release weekly (Dependabot does
+# not). Actions PRs stay manual: GITHUB_TOKEN cannot merge workflow file changes.
 name: deps
 
 on:
@@ -21,7 +22,8 @@ jobs:
       github.event.workflow_run.event == 'pull_request' &&
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.actor.login == 'dependabot[bot]' &&
-      github.event.workflow_run.head_repository.full_name == github.repository
+      github.event.workflow_run.head_repository.full_name == github.repository &&
+      startsWith(github.event.workflow_run.head_branch, 'dependabot/go_modules/')
     runs-on: ubuntu-latest
     steps:
       # --match-head-commit: never merge a commit ci did not test
