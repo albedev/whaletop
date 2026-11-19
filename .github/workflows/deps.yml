@@ -36,13 +36,13 @@ jobs:
   bump-go:
     if: github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
-    env:
-      GOTOOLCHAIN: auto
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
+      # setup-go writes GOTOOLCHAIN=local to GITHUB_ENV, overriding job env; auto lets go fetch the new patch
+      - run: echo GOTOOLCHAIN=auto >> "$GITHUB_ENV"
       - run: go get go@patch
       - id: diff
         run: git diff --quiet go.mod || echo changed=true >> "$GITHUB_OUTPUT"
